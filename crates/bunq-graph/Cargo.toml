@@ -1,0 +1,90 @@
+[package]
+name = "bunq-graph"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+license.workspace = true
+readme = "../../README.md"
+description = "Synchronize bunq account balances through a Clepsydra graph"
+keywords = ["bunq", "banking", "payments", "clepsydra"]
+categories = ["command-line-utilities"]
+
+[features]
+default = []
+embedded-graph = []
+secretspec-keyring = ["secretspec/keyring"]
+secretspec-sops = ["secretspec/sops"]
+secretspec-bitwarden = ["secretspec/bw"]
+secretspec-keeper = ["secretspec/keeper"]
+secretspec-gcsm = ["secretspec/gcsm"]
+secretspec-awssm = ["secretspec/awssm"]
+secretspec-awsps = ["secretspec/awsps"]
+secretspec-vault = ["secretspec/vault"]
+secretspec-openbao = ["secretspec/openbao"]
+secretspec-bws = ["secretspec/bws"]
+secretspec-akv = ["secretspec/akv"]
+secretspec-aac = ["secretspec/aac"]
+secretspec-infisical = ["secretspec/infisical"]
+secretspec-doppler = ["secretspec/doppler"]
+secretspec-age = ["secretspec/age"]
+secretspec-ejson = ["secretspec/ejson"]
+secretspec-scaleway = ["secretspec/scaleway"]
+secretspec-kubernetes = ["secretspec/kubernetes"]
+secretspec-cloudflare = ["secretspec/cloudflare"]
+secretspec-setec = ["secretspec/setec"]
+# Keepass/kdbx is deliberately unavailable: keepass 0.13.25 declares an
+# aes version that resolves to cipher 0.4 while its source imports cipher 0.5
+# traits, so the KDBX provider does not compile with the current dependency
+# graph. The durable fix belongs upstream in keepass-rs.
+secretspec-all-providers = [
+  "secretspec/cli",
+  "secretspec/keyring",
+  "secretspec/keeper",
+  "secretspec/gcsm",
+  "secretspec/awssm",
+  "secretspec/awsps",
+  "secretspec/vault",
+  "secretspec/openbao",
+  "secretspec/bws",
+  "secretspec/akv",
+  "secretspec/aac",
+  "secretspec/infisical",
+  "secretspec/doppler",
+  "secretspec/bw",
+  "secretspec/age",
+  "secretspec/ejson",
+  "secretspec/scaleway",
+  "secretspec/sops",
+  "secretspec/kubernetes",
+  "secretspec/cloudflare",
+  "secretspec/setec",
+]
+
+[dependencies]
+clepsydra-lib.workspace = true
+bunq-api.workspace = true
+secretspec.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+schemars.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+toml.workspace = true
+secretspec-derive.workspace = true
+
+[[bin]]
+name = "bunq-graph"
+path = "src/main.rs"
+
+[[bin]]
+name = "bunq-graph-schemas"
+path = "src/bin/schemas.rs"
+
+[lib]
+name = "bunq_graph"
+path = "src/lib.rs"
+
+[lints]
+workspace = true

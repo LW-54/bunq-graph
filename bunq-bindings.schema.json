@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bindings",
+  "description": "Account-name-to-IBAN bindings for a bunq-graph configuration.",
+  "type": "object",
+  "required": [
+    "account"
+  ],
+  "properties": {
+    "account": {
+      "description": "One binding for each account named by the graph.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Binding"
+      }
+    }
+  },
+  "definitions": {
+    "Binding": {
+      "description": "A Clepsydra account name mapped to a bunq IBAN.",
+      "type": "object",
+      "required": [
+        "iban",
+        "name"
+      ],
+      "properties": {
+        "external": {
+          "description": "Whether this binding represents an external account.",
+          "default": false,
+          "type": "boolean"
+        },
+        "iban": {
+          "description": "IBAN used to identify the bunq account or counterparty.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Account name used by the Clepsydra graph.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

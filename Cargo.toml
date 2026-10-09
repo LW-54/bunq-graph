@@ -2,8 +2,26 @@
 resolver = "2"
 members = ["crates/*"]
 
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+repository = "https://github.com/LW-54/bunq-graph"
+license = "MIT OR Apache-2.0"
+
 [workspace.dependencies]
-#serde = { version = "1.0", features = ["derive"] }
+clepsydra-lib = { version = "0.1.0", git = "https://github.com/LW-54/clepsydra", rev = "06b006c5ff60dfd63be95cb2af73a1a84a3e97cb" }
+bunq-api = { version = "0.1.0", git = "https://github.com/LW-54/bunq-rs", rev = "c6fc6f1a54ef5068bcdd977cbe2ab7f0011eb2c3" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+schemars = "0.8.22"
+thiserror = "2.0"
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+toml = "0.8"
+
+secretspec = { version = "0.21.1", default-features = false }
+secretspec-derive = "0.21.1"
 
 [workspace.lints.clippy]
 pedantic = { level = "deny", priority = -1 }

@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "nodes"
+      ]
+    },
+    {
+      "required": [
+        "accounts"
+      ]
+    }
+  ],
+  "definitions": {
+    "FlowConfig": {
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "volume"
+          ]
+        },
+        {
+          "required": [
+            "amount"
+          ]
+        }
+      ],
+      "properties": {
+        "amount": {
+          "format": "uint64",
+          "minimum": 0.0,
+          "type": "integer"
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "volume": {
+          "format": "uint64",
+          "minimum": 0.0,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "NodeConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "capacity": {
+          "format": "uint64",
+          "minimum": 0.0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accounts": {
+      "additionalProperties": {
+        "$ref": "#/definitions/NodeConfig"
+      },
+      "type": "object"
+    },
+    "default_account_target": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_bucket_target": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_flow_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_flow_target": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_transfer_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_transfer_target": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "flow": {
+      "default": [],
+      "items": {
+        "$ref": "#/definitions/FlowConfig"
+      },
+      "type": "array"
+    },
+    "nodes": {
+      "additionalProperties": {
+        "$ref": "#/definitions/NodeConfig"
+      },
+      "type": "object"
+    },
+    "transfers": {
+      "default": [],
+      "items": {
+        "$ref": "#/definitions/FlowConfig"
+      },
+      "type": "array"
+    }
+  },
+  "title": "Config",
+  "type": "object"
+}
